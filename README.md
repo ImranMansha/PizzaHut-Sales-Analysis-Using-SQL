@@ -51,13 +51,14 @@ ORDER BY pizzas.price DESC
 LIMIT 1;
 
 ### 2. List the Top 5 Most Ordered Pizza Types
-
+```sql
 WITH PizzaRevenue AS (
     SELECT pt.name, SUM(od.quantity * p.price) AS pizza_revenue
     FROM pizzas p
     JOIN order_details od ON p.pizza_id = od.pizza_id
     JOIN pizza_types pt ON p.pizza_type_id = pt.pizza_type_id
     GROUP BY pt.name
+```
 )
 SELECT name, pizza_revenue
 FROM PizzaRevenue
