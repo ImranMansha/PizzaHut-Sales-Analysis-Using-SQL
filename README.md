@@ -58,23 +58,22 @@ WITH PizzaRevenue AS (
     JOIN order_details od ON p.pizza_id = od.pizza_id
     JOIN pizza_types pt ON p.pizza_type_id = pt.pizza_type_id
     GROUP BY pt.name
-```
 )
 SELECT name, pizza_revenue
 FROM PizzaRevenue
 ORDER BY pizza_revenue DESC
 LIMIT 5;
-
+```
 ### 3. Determine the Distribution of Orders by Hour of the Day
-
+```sql
 SELECT HOUR(order_time) AS hour, COUNT(*) AS order_count
 FROM orders
 GROUP BY hour
 ORDER BY hour;
-
+```
 ### 4. Calculate the Percentage Contribution of Each Category to Total Revenue
 
-
+```sql
 WITH TotalRevenue AS (
     SELECT SUM(od.quantity * p.price) AS total_revenue
     FROM pizzas p
@@ -91,7 +90,7 @@ SELECT category,
        ROUND((category_revenue / (SELECT total_revenue FROM TotalRevenue) * 100), 2) AS percentage_contribution
 FROM CategoryRevenue
 ORDER BY percentage_contribution DESC;
-
+```
 ## Contributing
 
 Feel free to fork the repository, make changes, and submit pull requests. Contributions and suggestions are welcome!
